@@ -1,0 +1,13 @@
+{
+  "name": "gudcook",
+  "version": "1.0.0",
+  "description": "Backend for gudcook.me",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sudeep.das.in@gmail.com",
+  "license": "ISC"
+}

@@ -1,0 +1,246 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: User Management apis for e-qual
+    url: https://virtserver.swaggerhub.com/sudeepd/dukaan/1.0.0
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: Gudcook.me api
+  contact:
+    email: sudeep.das.in@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Users
+    description: Users of the application
+  - name: Dish
+    description: A receipe/ cooked item
+
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+  none:
+    validateRequestBody: false
+    validateRequestParameters: false
+  params-only:
+    validateRequestBody: false
+    validateRequestParameters: true
+
+x-amazon-apigateway-request-validator: none
+
+paths:
+  /user:
+    post:
+      tags:
+        - Users
+      summary: Creates a user
+      operationId: createUser
+      requestBody:
+        description: Body of the request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateRequest'
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResponse'
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+        '400':
+          description: bad input parameter
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-auth:
+        type: none
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:{{AWS_REGION}}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{AWS_REGION}}:{{AWS_ACCOUNT_ID}}:function:${stageVariables.UserHandlerFunction}:${stageVariables.Alias}/invocations
+        passthroughBehavior: never
+        httpMethod: POST
+        type: aws_proxy
+  
+  /user/{id}:
+    get:
+      tags:
+        - Users
+      summary: Gets an user with given id
+      operationId : getUser
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get          
+      responses:
+        '200':
+          description: Success response
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGetResponse'
+        '404': 
+          description: Not found
+        '500': 
+          description : Internal server error
+      
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-auth:
+        type: none
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:{{AWS_REGION}}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{AWS_REGION}}:{{AWS_ACCOUNT_ID}}:function:${stageVariables.UserHandlerFunction}:${stageVariables.Alias}/invocations
+        passthroughBehavior: never
+        httpMethod: POST
+        type: aws_proxy
+                
+    delete:
+      tags:
+        - Users
+      summary: Deletes an user with given id
+      operationId : deleteUser
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to delete          
+      responses:
+        '200':
+          description: Success response
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+        '404': 
+          description: Not found
+        '500': 
+          description : Internal server error
+      
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-auth:
+        type: none
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:{{AWS_REGION}}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{AWS_REGION}}:{{AWS_ACCOUNT_ID}}:function:${stageVariables.UserHandlerFunction}:${stageVariables.Alias}/invocations
+        passthroughBehavior: never
+        httpMethod: POST
+        type: aws_proxy
+
+    patch:
+      tags:
+        - Users
+      summary: Modifies attributes of an user
+      operationId : modifyUser
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get          
+      requestBody:
+        description: Body of the request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserModifyRequest'
+      responses:
+        '200':
+          description: Success response
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModifyResponse'
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-auth:
+        type: none
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:{{AWS_REGION}}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{AWS_REGION}}:{{AWS_ACCOUNT_ID}}:function:${stageVariables.UserHandlerFunction}:${stageVariables.Alias}/invocations
+        passthroughBehavior: never
+        httpMethod: POST
+        type: aws_proxy
+
+
+components:
+  schemas:
+    CreateResponse:
+      required: 
+        - id
+      properties:
+        id:
+          type: number    
+
+    UserCreateRequest:
+      required: 
+        - email
+        - phone
+      properties:
+        email:
+          type: string
+        phone:
+          type: string
+          example: 408-867-5309
+        persona:
+          type: array
+          items:
+            type: string
+            enum: [ 'coach', 'seeker' ]
+    UserModifyResponse:
+      required: 
+        - id
+      properties:
+        id:
+          type: number
+    UserModifyRequest:
+      properties:
+        email:
+          type: string
+        phone:
+          type: string
+          example: 408-867-5309
+        persona:
+          type: array
+          items:
+            type: string
+            enum: [ 'coach', 'seeker' ]

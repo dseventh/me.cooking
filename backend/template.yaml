@@ -1,0 +1,129 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: User and group management apis
+Parameters:
+  Stage:
+    Type: String
+  DomainName:
+    Type: String
+  HostedZoneId:
+    Type: String
+  CertificateArn:
+    Type: String
+  PublishAlias:
+    Type : String
+
+Globals:
+  Function:
+    Runtime: nodejs12.x
+    Timeout: 10
+    CodeUri: .
+
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          -
+            Effect: 'Allow'
+            Principal:
+              Service:
+                - 'lambda.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      Path: '/'
+      Policies:
+        -
+          PolicyName: 'LambdaExecutionPolicy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              -
+                Effect: 'Allow'
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                  - 'lambda:InvokeFunction'
+                  - 'lambda:ListVersionsByFunction'
+                Resource: '*'
+
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      DefinitionUri: ./swagger-deploy.yaml
+      StageName: !Ref Stage
+      Variables:
+        StageId: !Ref Stage
+        UserHandlerFunction: !Ref UserHandlerFunction
+        Alias : !Ref PublishAlias
+
+
+  APIDomainName:
+    Type: AWS::ApiGateway::DomainName
+    Properties:
+      CertificateArn: !Ref CertificateArn
+      DomainName: !Ref DomainName
+      EndpointConfiguration:
+        Types:
+          - EDGE
+
+  APIBasePathMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    DependsOn: APIDomainName
+    Properties:
+      DomainName: !Ref DomainName
+      RestApiId: !Ref ApiGatewayApi
+      BasePath: !Ref Stage
+      Stage: !Ref Stage
+
+  APIDNSRecord:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      RecordSets:
+        - Name: !Ref DomainName
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt APIDomainName.DistributionDomainName
+            HostedZoneId: Z2FDTNDATAQYW2
+
+
+  UserHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/user.handler
+      Runtime: nodejs12.x
+      Timeout: 900
+      FunctionName: !Sub ${AWS::StackName}-UserHandlerFunction
+      AutoPublishAlias: !Ref PublishAlias
+      Role: !GetAtt LambdaExecutionRole.Arn
+      CodeUri: .
+
+      Events:
+        UserCreateEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGatewayApi
+            Path: /user
+            Method: post
+        UserGetEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGatewayApi
+            Path: /user/{id}
+            Method: get
+        UserModifyEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGatewayApi
+            Path: /user/{id}
+            Method: patch
+        UserDeleteEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGatewayApi
+            Path: /user/{id}
+            Method: delete
