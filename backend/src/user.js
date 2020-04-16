@@ -22,8 +22,9 @@ function userDelete(event, context, callback)  {
   callback(null, { statusCode : 200 , body   });
 }
 
-// We are interested in only those cases where the user is activated or deactiveted
 function userPost(event, context, callback)  {
+  let user = JSON.parse(event.body);
+  
   let response = { id : 100 , message : "Post invoked"} ;
   let body = JSON.stringify(response);
   callback(null, { statusCode : 200 , body   });

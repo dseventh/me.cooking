@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row" id="gc-sh-top-row">
+        <div class="col-md-12">
+            <h3 class="mt-3">Welcome Back !</h3>
+        </div>
+    </div>
+    <div class="row" id="gc-sh-profile-row">
+        <div class="col-md-2">
+            <img class="img-thumbnail" alt="seeker image" src="https://www.thispersondoesnotexist.com/image" />
+        </div>
+        <div class="col-md-2 border-right">
+            <p class="mt-2">{{seeker.firstName}} {{seeker.lastName}}</p>
+            <p class="mt-2">Member since : {{seeker.joinDate.toDateString()}}</p>
+        </div>
+        <div class="col-md-4 border-right">
+            <p>
+                Upcoming Appointments
+                <button type="button" class="btn px-3 ml-2">
+                    <i class="fa fa-edit fa-2x"></i>
+                </button>            
+            </p>
+            <ul class="list-group">
+                <li *ngFor="let item of seeker.appointments" class="list-group-item border-0">
+                    <i class="fa fa-calendar mr-2"></i>{{item.startTime| date:'medium'}}
+                </li>
+            </ul>            
+        </div>
+        <div class="col-md-4">
+            <p>
+                Favorites
+                <button type="button" class="btn px-3 ml-2">
+                </button>            
+            </p>
+            <ul class="list-group">
+                <li *ngFor="let item of seeker.favorites" class="list-group-item border-0">
+                    {{item.name}}
+                </li>
+            </ul>            
+        
+        </div>
+    </div>
+    <div class="row" id="gc-sh-dish-header-row">
+        <div class="col-md-12 pt-3">
+            <h3>
+                Browse from our dish library
+            </h3>
+            <p>
+            We have over 100 chefs providing a wide range of dishes to choose from
+            </p>
+        </div>
+    </div>
+    <div class="row" id="gc-sh-dish-search-row">
+        <div class="col-md-4">
+            <p>When</p>
+            <ngb-datepicker #dp [(ngModel)]="searchParams.date"></ngb-datepicker>
+        </div>
+        <div class="col-md-4">
+            <p>Food experience</p>
+            <select class="select-css" [(ngModel)]="searchParams.cuisine">
+                <option *ngFor="let cuisine of cuisines; let i = index" [value]="cuisine">
+                  {{cuisine}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <p>Duration</p>
+            <select class="select-css" [(ngModel)]="searchParams.duration">
+                <option *ngFor="let duration of durations; let i = index" [value]="durations[i]">
+                  {{duration.min}} - {{duration.max}} minutes
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row card-group" id="gc-sh-dishes-row">
+        <div class="col-4"  *ngFor="let item of seeker.favorites">
+            <a routerLink='/product'>
+                <div class="card">
+                    <div class="card-img-caption">
+                        <img class="card-img-top" src="{{item.pictureId}}" alt="{{item.name}}">
+                    </div>                    
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+

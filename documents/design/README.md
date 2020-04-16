@@ -11,3 +11,4 @@ The entities and their relationships
 https://app.swaggerhub.com/apis/sudeepd/me.cooking/1.0.0
 
 
+The datamodel uses Adjacency list 
