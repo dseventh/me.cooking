@@ -15,6 +15,7 @@ export class Dish extends Entity{
     story: string;
     video : string;
     cuisine : string;
+    creator : string;
 };
 
 export class Appointment extends Entity {
@@ -23,8 +24,7 @@ export class Appointment extends Entity {
 };
 
 export class User extends Entity{
-    firstName : string;
-    lastName : string;
+    displayName : string;
     email : string;
     joinDate: Date;
     description : string; 
@@ -32,6 +32,7 @@ export class User extends Entity{
 };
 
 export class Coach extends User{
+    cuisines : string[];
     dishes : Dish[];
     appointments : Appointment[];
 };
@@ -50,4 +51,26 @@ export class CuisineSearchParams {
     date : NgbDateStruct ;
     cuisine : string;
     duration : Duration   
+}
+
+export class Card {
+    image : string; 
+    text : string;
+    heading : string;
+}
+
+export class FilterData {
+    title: string;
+    options : string[] | number[];
+    unit : string = "";
+    selected : string |  number;
+}
+
+export class BannerData {
+    image? : string;
+    heading : string;
+    content : string;
+    buttonText : string;
+    buttonRoute : string[];
+    overlay? : true;
 }

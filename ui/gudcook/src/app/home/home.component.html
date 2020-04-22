@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <app-banner [bannerData] = "bannerData"></app-banner>
+    <div class="row mt-5 card-group">
+        <div class="col-4" *ngFor="let item of items">
+            <div class="card">
+                <img class="card-img-top" src="{{item.image}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.heading}}</h5>
+                  <p class="card-text">{{item.text}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-dish-browser></app-dish-browser>
+</div>
+

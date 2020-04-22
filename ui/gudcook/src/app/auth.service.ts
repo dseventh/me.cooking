@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import {COACHES, SEEKERS} from './mock-data';
+import {Router} from '@angular/router';
 import {Coach} from './models';
 import { Observable, of } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
+
 
 function pickRandomArrayItem(input : any[]) {
   let min = 0;
@@ -15,15 +18,34 @@ function pickRandomArrayItem(input : any[]) {
   providedIn: 'root'
 })
 export class AuthService {
-  getLoggedInUser() : Observable<string> {
-    if ( Math.random() >= 0.5) {
-      let coach: Coach = pickRandomArrayItem(COACHES);
-      return of(coach.email);
-    } else {
-      let seeker: Coach = pickRandomArrayItem(SEEKERS);
-      return of(seeker.email);
-    }
-  }
+  private user: Observable<firebase.User>;
+  private userDetails: firebase.User = null;
   
-  constructor() { }
+  constructor(private _firebaseAuth: AngularFireAuth, private router: Router) { 
+    this.user = _firebaseAuth.authState;
+    this.user.subscribe(
+      (user) => {
+        if (user) {
+          this.userDetails = user;
+          console.log(this.userDetails);
+        }
+        else {
+          this.userDetails = null;
+        }
+      }
+    );
+  }
+
+  isLoggedIn() {
+    if (this.userDetails == null ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  
+  logout() {
+    this._firebaseAuth.signOut()
+    .then((res) => this.router.navigate(['/']));
+  }
 }

@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="{{bannerData.overlay ? 'bg-overlay' : null}}">
+            <div class="pl-5 mt-5">
+                <h2 >{{bannerData.heading}}</h2>
+                <p class="w-50">{{bannerData.content}}</p>
+                <div *ngIf="bannerData.buttonText">
+                    <a [routerLink]="bannerData.buttonRoute">
+                        <button type="button" class="btn btn-primary btn-lg">{{bannerData.buttonText}}</button>
+                    </a>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>
+

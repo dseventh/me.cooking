@@ -23,10 +23,10 @@ export class DishDetailComponent implements OnInit {
         this.gudcookService.getDishById(params.get('id')))
     ).subscribe( d => { 
       this.dish = d;
-      this.gudcookService.getAppointmentsForDish(d.id).subscribe( x => {
-        this.appointments = x;
-        this.selected = x.map( x => false);
-      } );
+      // this.gudcookService.getAppointmentsForDish(d.id).subscribe( x => {
+      //   this.appointments = x;
+      //   this.selected = x.map( x => false);
+      // } );
     });    
   }
 

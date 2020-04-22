@@ -1,0 +1,24 @@
+<app-banner [bannerData]="bannerData"></app-banner>
+<div class="row">
+    <div class="col-md-4" *ngFor="let filter of filters">        
+        <p>{{filter.title}}</p>
+        <select class="select-css" [(ngModel)]="filter.selected" (change)="applyFilter()">
+            <option *ngFor="let item of filter.options; let i = index" value="{{item}}">{{item}} {{filter.unit}}</option>
+        </select>
+    </div>
+</div>
+<div class="row mt-5">        
+    <div class="col-4" *ngFor="let view of dishView">
+        <div  class="card mb-5">
+            <div class="card-img-caption">
+                <img class="card-img-top" src="{{view.pictureId}}">
+            </div>                    
+            <div class="card-body">
+                <h5 class="card-title">{{view.name}}</h5>
+                <i class="fa fa-cutlery mr-3"></i>{{getUserName(view.creator)}}<br>
+                Ratings : {{view.ratings}}<br>
+                <i class="fa fa-calendar mr-3"></i>Reserve time<br>
+            </div>
+        </div>
+    </div>
+</div>

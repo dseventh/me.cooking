@@ -15,12 +15,28 @@
               etag = "${md5(file("..//../dist/gudcook/runtime-es2015.js"))}"
             }
 
+            resource "aws_s3_bucket_object" "___dist_gudcook_firebase-auth-es5_js" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/firebase-auth-es5.js"
+              source = "..//../dist/gudcook/firebase-auth-es5.js"
+              content_type = "${lookup(var.mime_types, "js")}"
+              etag = "${md5(file("..//../dist/gudcook/firebase-auth-es5.js"))}"
+            }
+
             resource "aws_s3_bucket_object" "___dist_gudcook_fontawesome-webfont_svg" {
               bucket = "${aws_s3_bucket.gudcook-s3.id}"
               key = "/fontawesome-webfont.svg"
               source = "..//../dist/gudcook/fontawesome-webfont.svg"
               content_type = "${lookup(var.mime_types, "svg")}"
               etag = "${md5(file("..//../dist/gudcook/fontawesome-webfont.svg"))}"
+            }
+
+            resource "aws_s3_bucket_object" "___dist_gudcook_firebase-auth-es2015_js_map" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/firebase-auth-es2015.js.map"
+              source = "..//../dist/gudcook/firebase-auth-es2015.js.map"
+              content_type = "${lookup(var.mime_types, "map")}"
+              etag = "${md5(file("..//../dist/gudcook/firebase-auth-es2015.js.map"))}"
             }
 
             resource "aws_s3_bucket_object" "___dist_gudcook_vendor-es5_js" {
@@ -79,12 +95,28 @@
               etag = "${md5(file("..//../dist/gudcook/runtime-es5.js"))}"
             }
 
+            resource "aws_s3_bucket_object" "___dist_gudcook_firebase-auth-es5_js_map" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/firebase-auth-es5.js.map"
+              source = "..//../dist/gudcook/firebase-auth-es5.js.map"
+              content_type = "${lookup(var.mime_types, "map")}"
+              etag = "${md5(file("..//../dist/gudcook/firebase-auth-es5.js.map"))}"
+            }
+
             resource "aws_s3_bucket_object" "___dist_gudcook_styles-es2015_js" {
               bucket = "${aws_s3_bucket.gudcook-s3.id}"
               key = "/styles-es2015.js"
               source = "..//../dist/gudcook/styles-es2015.js"
               content_type = "${lookup(var.mime_types, "js")}"
               etag = "${md5(file("..//../dist/gudcook/styles-es2015.js"))}"
+            }
+
+            resource "aws_s3_bucket_object" "___dist_gudcook_firebase-auth-es2015_js" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/firebase-auth-es2015.js"
+              source = "..//../dist/gudcook/firebase-auth-es2015.js"
+              content_type = "${lookup(var.mime_types, "js")}"
+              etag = "${md5(file("..//../dist/gudcook/firebase-auth-es2015.js"))}"
             }
 
             resource "aws_s3_bucket_object" "___dist_gudcook_polyfills-es2015_js_map" {
@@ -207,12 +239,28 @@
               etag = "${md5(file("..//../dist/gudcook/main-es5.js"))}"
             }
 
+            resource "aws_s3_bucket_object" "___dist_gudcook_assets_heading_png" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/assets/heading.png"
+              source = "..//../dist/gudcook/assets/heading.png"
+              content_type = "${lookup(var.mime_types, "png")}"
+              etag = "${md5(file("..//../dist/gudcook/assets/heading.png"))}"
+            }
+
             resource "aws_s3_bucket_object" "___dist_gudcook_assets_logo_png" {
               bucket = "${aws_s3_bucket.gudcook-s3.id}"
               key = "/assets/logo.png"
               source = "..//../dist/gudcook/assets/logo.png"
               content_type = "${lookup(var.mime_types, "png")}"
               etag = "${md5(file("..//../dist/gudcook/assets/logo.png"))}"
+            }
+
+            resource "aws_s3_bucket_object" "___dist_gudcook_assets_signin-right_jpg" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/assets/signin-right.jpg"
+              source = "..//../dist/gudcook/assets/signin-right.jpg"
+              content_type = "${lookup(var.mime_types, "jpg")}"
+              etag = "${md5(file("..//../dist/gudcook/assets/signin-right.jpg"))}"
             }
 
             resource "aws_s3_bucket_object" "___dist_gudcook_assets_dish-1_png" {

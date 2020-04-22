@@ -1,0 +1,73 @@
+<div class="container-fluid">
+	<div class="row">
+        <div class="col-md-6">
+            <div class="row mt-5" style="height: 200px;">
+                <div class="col-md-12">
+                    <img alt="Heading" src="/assets/heading.png" class="mx-auto d-block"/>
+                    <h5 class="text-center">
+                        Anybody can be a gudcook
+                    </h5>                    
+                </div>
+            </div>
+            <div class="row" style="height: 100px;">
+                <div class="col-md-12">
+                    <h3 class="text-center">
+                        Lets get food on the table
+                    </h3>
+                </div>
+            </div>
+            <div class="row" style="height: 300px;">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><label  for="nameEditBox">My name is</label></td>
+                                <td><input type="text" id="nameEditBox" class="form-control text-center" placeholder="Name" [(ngModel)]="user" /></td>
+                              </tr>
+                              <tr>
+                            <td><label  for="emailEditBox">My email is</label></td>
+                            <td><input type="email" id="emailEditBox" class="form-control text-center" placeholder="Email Address" [(ngModel)]="email"/></td>
+                          </tr>
+                          <tr>
+                            <td><label  for="passwordEditBox">My password is</label></td>
+                            <td><input type="password" id="passwordEditBox" class="form-control text-center" placeholder="password" [(ngModel)]="password"/></td>
+                          </tr>
+                          <tr>
+                            <td><label  for="retypeEditBox">Retype password</label></td>
+                            <td><input type="password" id="retypeEditBox" class="form-control text-center" placeholder="password" [(ngModel)]="retypePassword"/></td>
+                          </tr>
+                        </tbody>
+                    </table>                    
+                    <div class="text-center mt-2">
+                        <!-- <button type="submit" class="btn btn-primary w-100" (click)="loginWithPassword()">
+                            Login
+                        </button> -->
+                    </div>
+                    <div class="text-center mt-2">
+                        <!-- <button type="button" class="btn btn-primary text-center w-100" (click)="loginWithGoogle()">
+                            <i class="fa fa-google mr-2"></i>Signin with Google
+                        </button> -->
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="row mt-5" style="height: 100px;">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <button type="submit" class="btn btn-primary w-100" (click)="signupUser()">
+                        Register
+                    </button>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+		<div class="col-md-6 mt-0">
+			<img alt="Bootstrap Image Preview" src="/assets/signin-right.jpg" class="img-fluid" />
+		</div>
+	</div>
+</div>
