@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <app-banner [bannerData] = "banner"></app-banner>
+    <div class="row mt-5">
+        <div class="col-12 ml-3">
+            <h3>Describe your dish</h3>
+            <p>Fill out the information below to let others know more about the dish and its journey</p>
+            <app-uploader [imageUrl]="imageUrl" [directory]="getImagesDirectory()" [prefix]="'dishes'" (status)="onStatusChange($event)" ></app-uploader>            
+        </div>
+    </div>
+    <div class="row mt-2 ml-3">
+        <div class="col-md-6">
+            <label for="name">Provide a name for your food experience</label>        
+            <input id="name" class="form-control form-control-lg w-100" type="text" placeholder="Give a short title">
+        </div>
+        <div class="col-md-6">
+            <label for="email">Add a link to your video</label>        
+            <input id="email" class="form-control form-control-lg w-100" type="text" placeholder="Link to youtube video">
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 ml-3">
+            <h3>Provide cooking details for your dish</h3>
+            <p>Give information about this dish that can help others to mske this dish</p>
+        </div>
+    </div>
+    <div class="row mt-2 ml-3">
+        <div class="col-md-6" *ngFor="let filter of filters">        
+            <p>{{filter.title}}</p>
+            <select class="select-css" [(ngModel)]="filter.selected" (change)="applyFilter()">
+                <option *ngFor="let item of filter.options; let i = index" value="{{item}}">{{item}} {{filter.unit}}</option>
+            </select>
+        </div>
+        <hr>
+    </div>
+    <div class="row mt-5 ml-3">
+        <div class="col-md-6">        
+            <p>List of ingredients</p>
+        </div>
+        <div class="col-md-6">        
+            <p>List of equipment</p>
+        </div>
+    </div>
+    <div class="row ml-3 mt-5">
+        <div class="col-md-12">
+            <label for="description">Tell us how you would conduct this class</label>        
+            <textarea id="description" class="form-control form-control-lg w-50" rows="5"></textarea>
+        </div>
+    </div>
+    <div class="row ml-3 mt-5 mb-5">
+        <div class="col-md-12">
+            <button class="btn btn-primary" (click)="saveDish()">Save</button>
+        </div>
+    </div>
+</div>
+
+

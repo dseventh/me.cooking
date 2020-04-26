@@ -102,6 +102,22 @@ export class GudcookService {
     })))      
   }
   
+  getDishesByCreator(creatorId : string) : Observable<Dish[]> {
+    return this.firestore.collection('dishes', ref => ref.where( 'creator' ,'==',creatorId)).get().pipe( map ( document => document.docs.map( x => {
+      let d = new Dish;
+      d.id = x.id;
+      d.creator = x.get('creator');
+      d.cuisine = x.get('cuisine');
+      d.name = x.get('name');
+      d.description = x.get('description');
+      d.pictureId = x.get('image');
+      d.equipment = x.get('equipment');
+      d.ingredients = x.get('ingredients');
+      d.ratings = x.get('ratings');
+      d.duration = x.get('duration');
+      return d;
+    })))      
+  }
 
 
   getCuisines() : Observable<string[]>{

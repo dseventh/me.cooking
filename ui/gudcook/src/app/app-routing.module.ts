@@ -13,6 +13,7 @@ import {AuthGuardService as AuthGuard } from './auth-guard.service';
 import { ReserveComponent } from './reserve/reserve.component';
 import { FirstloginComponent } from "./firstlogin/firstlogin.component";
 import { ProfileComponent } from './profile/profile.component';
+import { NewDishComponent } from './new-dish/new-dish.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path: 'seeker',
     component: SeekerhomeComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path: 'newdish',
+    component: NewDishComponent,
     canActivate : [AuthGuard]
   },
   {

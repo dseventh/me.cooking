@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Seeker,Duration, CuisineSearchParams } from '../models';
 import { CacheService } from '../cache.service';
 import { Router } from '@angular/router';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { GudcookService } from '../gudcook.service';
 import { AngularFireStorage } from "@angular/fire/storage";
-import { map, finalize } from "rxjs/operators";
-import { Observable } from "rxjs";
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UploadStatus } from '../uploader/uploader.component';
 
@@ -22,7 +19,6 @@ export class SeekerhomeComponent implements OnInit {
 
   constructor(private gudcookService : GudcookService, 
     private firebaseAuth: AngularFireAuth, 
-    private calendar :NgbCalendar,
     private storage : AngularFireStorage,
     private router : Router) { 
     }

@@ -13,7 +13,7 @@ import { UploadStatus } from '../uploader/uploader.component';
   styleUrls: ['./coachhome.component.css']
 })
 export class CoachhomeComponent implements OnInit {
-  coach : Coach;
+  coach : Coach = null;
   imageUrl : string;
   currentStatus : UploadStatus;
 

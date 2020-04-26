@@ -26,6 +26,9 @@ import { ReserveComponent } from './reserve/reserve.component';
 import { FirstloginComponent } from './firstlogin/firstlogin.component';
 import { UploaderComponent } from './uploader/uploader.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DishEditorComponent } from './dish-editor/dish-editor.component';
+import { NewDishComponent } from './new-dish/new-dish.component';
+// /import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
@@ -46,11 +49,14 @@ import { ProfileComponent } from './profile/profile.component';
     FirstloginComponent,
     UploaderComponent,
     ProfileComponent,
+    DishEditorComponent,
+    NewDishComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+//    TagInputModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase, 'cooking-gig'),
     AngularFirestoreModule,

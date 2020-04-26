@@ -20,11 +20,11 @@
                 </button>            
             </p>
             <p>
-                Email : {{coach.email}}
+                Email : {{coach?.email}}
             </p>
             <p>
                 About me:<br>
-                {{coach.description}}
+                {{coach?.description}}
             </p>        
         </div>
         <div class="col-md-4 border-right">
@@ -41,5 +41,5 @@
             </ul>            
         </div>
     </div>
-    <app-dish-browser></app-dish-browser>
+    <app-dish-editor *ngIf="coach" [coach]="coach"></app-dish-editor>
 </div>
