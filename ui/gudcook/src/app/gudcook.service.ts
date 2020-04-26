@@ -20,13 +20,25 @@ export class GudcookService {
     
   // Converts firebase user document to application docuement
   docToUser(id : string , docData : DocumentData) : User{    
-    console.log(`Creating user ${id} ${docData.displayName}`)
     let user = new User;
-    user.email = docData.email;
-    user.description = docData.description;
-    user.displayName = docData.displayName;
-    user.joinDate = docData.joinDate;
-    user.persona = docData.persona;
+    if (!id)
+      return user;
+    if (!docData)
+      return user;
+    if (docData.imageId)      
+      user.imageId = docData.imageId;
+    if (docData.email)      
+      user.email = docData.email;
+    if (docData.description)
+      user.description = docData.description;
+    if (docData.displayName)
+      user.displayName = docData.displayName;
+    if (docData.joinDate) {
+      user.joinDate = new Date(docData.joinDate);
+      console.log(`Join date value is ${docData.joinDate}`)
+    }
+    if (docData.persona)
+      user.persona = docData.persona;
     user.id = id; 
 
 
@@ -43,13 +55,24 @@ export class GudcookService {
       seeker.favorites = docData.dishes;
       return seeker;
     } else 
-    return user;
-
-       
+    return user;       
   }
 
   setUser( user : User) {
-    return this.firestore.collection('users').doc(user.id).set( { email : user.email},{ merge : true })
+    let item : any = {};
+    if (user.email)
+      item.email = user.email;
+    if (user.description) 
+      item.description = user.description;
+    if (user.displayName) 
+      item.displayName = user.displayName;
+    if (user.joinDate)
+      item.joinDate = user.joinDate.getTime();
+    if (user.persona)
+      item.persona = user.persona;
+    if (user.imageId)
+      item.imageId = user.imageId;
+    return this.firestore.collection('users').doc(user.id).set( item,{ merge : true })
   }
 
   getUser(userid) : Observable<User> {

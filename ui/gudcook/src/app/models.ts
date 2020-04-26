@@ -28,7 +28,8 @@ export class User extends Entity{
     email : string;
     joinDate: Date;
     description : string; 
-    persona : string;   
+    persona : string;
+    imageId : string;   
 };
 
 export class Coach extends User{

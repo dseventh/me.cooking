@@ -1,4 +1,5 @@
 <app-banner [bannerData]="bannerData"></app-banner>
+<hr>
 <div class="row">
     <div class="col-md-4" *ngFor="let filter of filters">        
         <p>{{filter.title}}</p>
@@ -17,7 +18,9 @@
                 <h5 class="card-title">{{view.name}}</h5>
                 <i class="fa fa-cutlery mr-3"></i>{{getUserName(view.creator)}}<br>
                 Ratings : {{view.ratings}}<br>
-                <i class="fa fa-calendar mr-3"></i>Reserve time<br>
+                <a [routerLink]="['/reserve']">
+                    <i class="fa fa-calendar mr-3"></i>Reserve time<br>
+                </a>
             </div>
         </div>
     </div>

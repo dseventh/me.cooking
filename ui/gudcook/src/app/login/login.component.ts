@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       if (user) {
           x.id = user.uid;
           x.email = user.email;
+          x.displayName = user.displayName;
           return from(this.gudcookService.setUser(x).then( () => x));          
         }
         else 
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
         if (u.persona === 'coach')
           this.router.navigate(['/coach']);  
         else 
-          this.router.navigate(['/signup']);
+          this.router.navigate(['/firstlogin']);
       }
     })
   }

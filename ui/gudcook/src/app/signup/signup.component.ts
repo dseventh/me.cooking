@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   retypePassword : string;
 
   constructor(private firebaseAuth: AngularFireAuth, 
+    private gudcookService : GudcookService,
     private router : Router) { }
   
   
@@ -23,11 +24,40 @@ export class SignupComponent implements OnInit {
   }
   
   validateInput() {
+    if (! ( this.user && this.user.length) ) 
+      return false;
+    if (! ( this.password && this.password.length) )
+      return false;
+    if (! ( this.retypePassword && this.retypePassword.length) )
+      return false;
+    
+    if ( this.password != this.retypePassword)
+      return false;
+
+    if (! this.email)
+      return false;
+    if (! ( this.email && this.email.length) )
+      return false;
     return true;
   }
   
   signupUser() : void {    
-    // if (this.validateInput() )    
-    //   this.firebaseAuth.createUserWithEmailAndPassword(this.email,this.password).then( () => this.router.navigate())
+    if (this.validateInput() )    
+      this.firebaseAuth.createUserWithEmailAndPassword(this.email,this.password)
+      .then( 
+        (user) => {
+          let u : User = new User;
+          u.id = user.user.uid;
+          u.email = user.user.email;
+          u.displayName = this.user;
+          return this.gudcookService.setUser(u);
+        }
+      )
+      .then( () => {
+        this.router.navigate(['firstlogin']);
+      })
+    else {
+      alert('Input validation error')
+    }
   }  
 }

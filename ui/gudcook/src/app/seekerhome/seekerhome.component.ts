@@ -4,6 +4,11 @@ import { CacheService } from '../cache.service';
 import { Router } from '@angular/router';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { GudcookService } from '../gudcook.service';
+import { AngularFireStorage } from "@angular/fire/storage";
+import { map, finalize } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UploadStatus } from '../uploader/uploader.component';
 
 @Component({
   selector: 'app-seekerhome',
@@ -11,43 +16,57 @@ import { GudcookService } from '../gudcook.service';
   styleUrls: ['./seekerhome.component.css']
 })
 export class SeekerhomeComponent implements OnInit {
-  seeker : Seeker;
-  cuisines : string[];
-  durations : Duration[] = [
-    { min : 0, max : 15 },
-    { min : 15, max : 30},
-    { min : 30, max : 45},
-    { min : 45, max : 60},
-    { min : 60, max : 75},
-    { min : 75, max : 90},
-    { min : 90, max : 105},
-    { min : 105, max : 120 },
-  ];
+  seeker : Seeker = null;
+  imageUrl : string;
+  currentStatus : UploadStatus;
 
-  searchParams : CuisineSearchParams ;
-
-  constructor( private cacheService: CacheService, 
-    private router : Router,
+  constructor(private gudcookService : GudcookService, 
+    private firebaseAuth: AngularFireAuth, 
     private calendar :NgbCalendar,
-    private gudcookService: GudcookService) { 
-      this.searchParams = new CuisineSearchParams;
-      this.searchParams.date = calendar.getToday();
-      this.searchParams.cuisine = 'any';
-      this.searchParams.duration = { min : 0, max : 120};
+    private storage : AngularFireStorage,
+    private router : Router) { 
     }
 
   ngOnInit() {
-    this.cacheService.getUser().subscribe(user => {
-      if (!user)
-        this.router.navigate(['home'])  
-      else {
-        this.gudcookService.getCuisines().subscribe( c => {
-          console.log('Initializing seeker')
-          this.cuisines = c;
-          this.seeker = user as Seeker;      
-          this.searchParams.date = this.calendar.getToday();
-        });
+    //TODO put flatmap here
+    this.firebaseAuth.currentUser.then( u => {
+      if (u) {
+        this.gudcookService.getUser(u.uid).subscribe( user => {
+          this.seeker = user as Seeker;
+          console.log(`Displayname is ${u.displayName}, joindate = ${user.joinDate}`);
+          if (user.imageId) {
+            console.log(`Image id ${user.imageId}`);
+            let pathRef = this.storage.ref(user.imageId);
+            pathRef.getDownloadURL().subscribe( url => {
+              console.log(`Download url ${url}`);
+              this.imageUrl = url;
+            })
+          }
+          else {
+            console.log(`No image id for user ${user.id}`);
+          }    
+        })
       }
-    })
+    });    
   }
+
+  onStatusChange(status : UploadStatus) {
+    console.log('File upload status')
+    this.currentStatus = status;
+    if (this.currentStatus.objectName) {
+      this.seeker.imageId = this.currentStatus.objectName;
+      let pathRef = this.storage.ref(this.currentStatus.objectName);
+      pathRef.getDownloadURL().subscribe( url => {
+        console.log('Setting image url')
+        this.imageUrl = url;
+      })
+    }
+  }
+
+  getImagesDirectory() {
+    if (this.seeker && this.seeker.id)
+      return 'images/' + this.seeker.id;
+    return null;
+  }
+
 }

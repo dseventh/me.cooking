@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { CompanyComponent } from './company/company.component';
@@ -9,11 +9,20 @@ import { SeekerhomeComponent } from './seekerhome/seekerhome.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import {LoginComponent} from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import {AuthGuardService as AuthGuard } from './auth-guard.service';
+import { ReserveComponent } from './reserve/reserve.component';
+import { FirstloginComponent } from "./firstlogin/firstlogin.component";
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'firstlogin',
+    component: FirstloginComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'login',
@@ -25,15 +34,28 @@ const routes: Routes = [
   },
   {
     path: 'coach',
-    component: CoachhomeComponent
+    component: CoachhomeComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'dish/:id',
-    component: DishDetailComponent
+    component: DishDetailComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'seeker',
-    component: SeekerhomeComponent
+    component: SeekerhomeComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path: 'reserve',
+    component: ReserveComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'product',

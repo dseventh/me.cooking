@@ -1,26 +1,3 @@
-#gc-sh-top-row {
-    height: 100px;
-}
-
-#gc-sh-profile-row {
-    height: 300px;    
-}
-
-#gc-sh-dish-header-row {
-    height: 100px;  
-    background-color: ivory;  
-}
-
-#gc-sh-dish-search-row {
-    height: 400px;  
-    background-color: ivory;  
-}
-
-#gc-sh-dishes-row {
-    height: 600px; 
-    background-color: ivory;   
-}
-
 .card-img-caption {
     border-top-left-radius: calc(.25rem - 1px);
     border-top-right-radius: calc(.25rem - 1px);

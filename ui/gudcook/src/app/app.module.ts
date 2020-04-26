@@ -22,6 +22,10 @@ import { SignupComponent } from './signup/signup.component';
 import { BannerComponent } from './banner/banner.component';
 import { DishBrowserComponent } from './dish-browser/dish-browser.component';
 import { GudcookService } from './gudcook.service';
+import { ReserveComponent } from './reserve/reserve.component';
+import { FirstloginComponent } from './firstlogin/firstlogin.component';
+import { UploaderComponent } from './uploader/uploader.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { GudcookService } from './gudcook.service';
     SignupComponent,
     BannerComponent,
     DishBrowserComponent,
+    ReserveComponent,
+    FirstloginComponent,
+    UploaderComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,7 @@ import { GudcookService } from './gudcook.service';
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase, 'cooking-gig'),
     AngularFirestoreModule,
-    AngularFireAuthModule          
+    AngularFireAuthModule 
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

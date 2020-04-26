@@ -239,6 +239,22 @@
               etag = "${md5(file("..//../dist/gudcook/main-es5.js"))}"
             }
 
+            resource "aws_s3_bucket_object" "___dist_gudcook_assets_home-our-story_jpg" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/assets/home-our-story.jpg"
+              source = "..//../dist/gudcook/assets/home-our-story.jpg"
+              content_type = "${lookup(var.mime_types, "jpg")}"
+              etag = "${md5(file("..//../dist/gudcook/assets/home-our-story.jpg"))}"
+            }
+
+            resource "aws_s3_bucket_object" "___dist_gudcook_assets_landing-page-top_png" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/assets/landing-page-top.png"
+              source = "..//../dist/gudcook/assets/landing-page-top.png"
+              content_type = "${lookup(var.mime_types, "png")}"
+              etag = "${md5(file("..//../dist/gudcook/assets/landing-page-top.png"))}"
+            }
+
             resource "aws_s3_bucket_object" "___dist_gudcook_assets_heading_png" {
               bucket = "${aws_s3_bucket.gudcook-s3.id}"
               key = "/assets/heading.png"
@@ -263,12 +279,28 @@
               etag = "${md5(file("..//../dist/gudcook/assets/signin-right.jpg"))}"
             }
 
+            resource "aws_s3_bucket_object" "___dist_gudcook_assets_home-middle-card_jpg" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/assets/home-middle-card.jpg"
+              source = "..//../dist/gudcook/assets/home-middle-card.jpg"
+              content_type = "${lookup(var.mime_types, "jpg")}"
+              etag = "${md5(file("..//../dist/gudcook/assets/home-middle-card.jpg"))}"
+            }
+
             resource "aws_s3_bucket_object" "___dist_gudcook_assets_dish-1_png" {
               bucket = "${aws_s3_bucket.gudcook-s3.id}"
               key = "/assets/dish-1.png"
               source = "..//../dist/gudcook/assets/dish-1.png"
               content_type = "${lookup(var.mime_types, "png")}"
               etag = "${md5(file("..//../dist/gudcook/assets/dish-1.png"))}"
+            }
+
+            resource "aws_s3_bucket_object" "___dist_gudcook_assets_image-placeholder_png" {
+              bucket = "${aws_s3_bucket.gudcook-s3.id}"
+              key = "/assets/image-placeholder.png"
+              source = "..//../dist/gudcook/assets/image-placeholder.png"
+              content_type = "${lookup(var.mime_types, "png")}"
+              etag = "${md5(file("..//../dist/gudcook/assets/image-placeholder.png"))}"
             }
 
             resource "aws_s3_bucket_object" "___dist_gudcook_assets_dish-2_png" {

@@ -1,0 +1,7 @@
+
+<app-uploader  [imageUrl]="'/assets/image-placeholder.png'" [directory]="'images'" [prefix]="'profile'" (status)="onStatusChange($event)" ></app-uploader>
+<div *ngIf="currentStatus">
+<p>{{currentStatus.state}}</p>
+<p>{{currentStatus.percentComplete}}</p>
+<p>{{currentStatus.objectName}}</p>
+</div>
