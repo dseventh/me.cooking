@@ -10,17 +10,17 @@
     <div class="row mt-2 ml-3">
         <div class="col-md-6">
             <label for="name">Provide a name for your food experience</label>        
-            <input id="name" class="form-control form-control-lg w-100" type="text" placeholder="Give a short title">
+            <input id="name" class="form-control form-control-lg w-100" type="text" placeholder="Give a short title" [(ngModel)]="dish.name">
         </div>
         <div class="col-md-6">
-            <label for="email">Add a link to your video</label>        
-            <input id="email" class="form-control form-control-lg w-100" type="text" placeholder="Link to youtube video">
+            <label for="video">Add a link to your video</label>        
+            <input id="video" class="form-control form-control-lg w-100" type="text" placeholder="Link to youtube video" [(ngModel)]="dish.video">
         </div>
     </div>
     <div class="row mt-5">
         <div class="col-12 ml-3">
             <h3>Provide cooking details for your dish</h3>
-            <p>Give information about this dish that can help others to mske this dish</p>
+            <p>Give information about this dish that can help others to make this dish</p>
         </div>
     </div>
     <div class="row mt-2 ml-3">
@@ -32,18 +32,20 @@
         </div>
         <hr>
     </div>
-    <div class="row mt-5 ml-3">
+    <div class="row mt-5 ml-3 overflow-auto">
         <div class="col-md-6">        
-            <p>List of ingredients</p>
+            <p>List of Ingredients</p>
+            <app-bag [itemType]="'Ingredient'" [display]="dish.ingredients" (added)="ingredientAdd($event)" (removed)="ingredientRemove($event)" ></app-bag>
         </div>
         <div class="col-md-6">        
             <p>List of equipment</p>
+            <app-bag [itemType]="'Equipment'" [display]="dish.equipment" (added)="equipmentAdd($event)" (removed)="equipmentRemove($event)" ></app-bag>
         </div>
     </div>
     <div class="row ml-3 mt-5">
         <div class="col-md-12">
             <label for="description">Tell us how you would conduct this class</label>        
-            <textarea id="description" class="form-control form-control-lg w-50" rows="5"></textarea>
+            <textarea id="description" class="form-control form-control-lg w-50" rows="5" [(ngModel)]="dish.story"></textarea>
         </div>
     </div>
     <div class="row ml-3 mt-5 mb-5">

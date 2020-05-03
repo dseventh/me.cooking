@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
@@ -28,7 +29,8 @@ import { UploaderComponent } from './uploader/uploader.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DishEditorComponent } from './dish-editor/dish-editor.component';
 import { NewDishComponent } from './new-dish/new-dish.component';
-// /import { TagInputModule } from 'ngx-chips';
+import { TagInputModule } from 'ngx-chips';
+import { BagComponent } from './bag/bag.component';
 
 @NgModule({
   declarations: [
@@ -51,13 +53,15 @@ import { NewDishComponent } from './new-dish/new-dish.component';
     ProfileComponent,
     DishEditorComponent,
     NewDishComponent,
+    BagComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-//    TagInputModule,
+    TagInputModule,
     NgbModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'cooking-gig'),
     AngularFirestoreModule,
     AngularFireAuthModule 

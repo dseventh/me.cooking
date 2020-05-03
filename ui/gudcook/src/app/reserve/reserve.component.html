@@ -1,7 +1,12 @@
 
-<app-uploader  [imageUrl]="'/assets/image-placeholder.png'" [directory]="'images'" [prefix]="'profile'" (status)="onStatusChange($event)" ></app-uploader>
+<!-- <app-uploader  [imageUrl]="'/assets/image-placeholder.png'" [directory]="'images'" [prefix]="'profile'" (status)="onStatusChange($event)" ></app-uploader>
 <div *ngIf="currentStatus">
 <p>{{currentStatus.state}}</p>
 <p>{{currentStatus.percentComplete}}</p>
-<p>{{currentStatus.objectName}}</p>
-</div>
+<p>{{currentStatus.objectName}}</p> -->
+<!-- <tag-input [ngModel]="['@item']">
+    <tag-input-dropdown [autocompleteItems]="[{display: 'Item1', value: 0}, 'item2', 'item3']">
+    </tag-input-dropdown>
+</tag-input> -->
+<!-- </div> -->
+<app-bag  [itemType]="'Ingredient'" [display]="ingredients" (added)="onAdd($event)" (removed)="onRemove($event)"></app-bag>

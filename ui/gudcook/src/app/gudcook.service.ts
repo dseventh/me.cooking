@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {Coach,Seeker, User,Dish,Appointment} from './models';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { doesNotThrow } from 'assert';
 
 
 @Injectable({
@@ -119,6 +120,40 @@ export class GudcookService {
     })))      
   }
 
+  setDish( dish: Dish) {
+    let item : any = {};
+    if (dish.creator)
+      item.creator = dish.creator;
+    if (dish.cuisine)
+      item.cuisine = dish.cuisine;
+    if (dish.description)
+      item.description = dish.description;
+    if (dish.duration)
+      item.duration = dish.duration;
+    if (dish.equipment)
+      item.equipment = dish.equipment;
+    if (dish.ingredients)
+      item.ingredients = dish.ingredients;
+    if (dish.name) 
+      item.name = dish.name;
+    if (dish.pictureId)
+      item.image = dish.pictureId;
+    if (dish.ratings)
+      item.ratings = dish.ratings;
+    if (dish.story)
+      item.story = dish.story;
+    if (dish.video)
+      item.video = dish.video;
+    return this.firestore.collection('dishes').add(item)
+      .catch( err => alert('Failed to add dish ${err}'));
+  }
+
+  getIngredients(searchString : string) : Observable<string[]> {
+    return this.firestore.collection('basics').doc('ingredients').get().pipe( map ( document =>  {
+      let result : string[] = document.get('names');
+      return result;
+    }))
+  }
 
   getCuisines() : Observable<string[]>{
     return this.firestore.collection('basics').doc('cuisines').get().pipe( map ( document =>  {

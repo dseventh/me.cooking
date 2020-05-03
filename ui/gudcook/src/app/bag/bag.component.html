@@ -1,0 +1,15 @@
+<div>    
+    <div class="col-md-12 input-group ">
+            <input  class="form-control" placeholder="Add {{itemType}}" type="text" [(ngModel)]="current"/>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add</button>
+            </div>
+    </div>    
+    <div class="col-md-12 input-group">
+        <div *ngFor="let item of display">
+            <button type="button" class="btn btn-outline-secondary mt-3 mr-3" (click)="onRemove(item)">{{item}}
+                <i class="fa fa-times"></i>
+            </button>
+        </div>        
+    </div>
+</div>

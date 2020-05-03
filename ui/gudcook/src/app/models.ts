@@ -64,7 +64,7 @@ export class FilterData {
     title: string;
     options : string[] | number[];
     unit : string = "";
-    selected : string |  number;
+    selected : number |  string;
 }
 
 export class BannerData {

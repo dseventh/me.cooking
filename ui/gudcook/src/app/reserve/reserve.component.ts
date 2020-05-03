@@ -7,13 +7,21 @@ import { UploadStatus, UploadState } from '../uploader/uploader.component';
   styleUrls: ['./reserve.component.css']
 })
 export class ReserveComponent implements OnInit {
-  currentStatus : UploadStatus ;
+  ingredients : string[] = [];
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onStatusChange(status : UploadStatus) {
-    this.currentStatus = status;
+  onAdd(status : string) {
+    console.log(`Added ingredient ${status}`);
+    this.ingredients.push(status);
   }
+
+  onRemove(status : string) {
+    console.log(`Removed ingredient ${status}`);
+    this.ingredients = this.ingredients.filter( x => status != x);
+    console.log(`Ingredients ${this.ingredients}`);
+  }
+
 }
