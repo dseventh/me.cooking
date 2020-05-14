@@ -65,7 +65,7 @@ export class FirstloginComponent implements OnInit {
   saveProfile() {
     if (this.user.persona)
       this.gudcookService.setUser(this.user).then( u => {
-        this.router.navigate([this.user.persona]);
+        this.router.navigate(['/editprofile']);
       })
     else alert('Choose role');
   }

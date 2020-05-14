@@ -12,13 +12,13 @@
     <div class="col-4" *ngFor="let view of dishView">
         <div  class="card mb-5">
             <div class="card-img-caption">
-                <img class="card-img-top" src="{{view.pictureId}}">
+                <a [routerLink]="['/dish',view.id]"><img class="card-img-top" src="{{view.pictureId}}"></a>
             </div>                    
             <div class="card-body">
-                <h5 class="card-title">{{view.name}}</h5>
+                <h5 class="card-title"><a [routerLink]="['/dish',view.id]">{{view.name}}</a></h5>
                 <i class="fa fa-cutlery mr-3"></i>{{getUserName(view.creator)}}<br>
                 Ratings : {{view.ratings}}<br>
-                <a [routerLink]="['/reserve']">
+                <a [routerLink]="['/dish',view.id]">
                     <i class="fa fa-calendar mr-3"></i>Reserve time<br>
                 </a>
             </div>

@@ -1,0 +1,47 @@
+.container-fluid {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.date-time-text {
+    color: #DADADA;
+}
+
+.btn-confirm {
+    margin-right: 20px;
+    background-color: #FEA705;
+    border-color: #FEA705;
+    color:#000000;
+    padding: 10px 35px;
+    border-radius: 35px;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    color:#000000;
+    padding: 10px 35px;
+    border-radius: 35px;
+    font-weight: bold;
+}
+
+.star.rating {
+    color: #FFC107 !important;
+}
+
+.star.ratingblank {
+    color: #ffffff !important;
+}
+
+.time-slot {
+    border: 1px solid #DFDFDF;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.teacher-time-slot {
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+}

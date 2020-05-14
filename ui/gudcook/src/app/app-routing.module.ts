@@ -14,6 +14,7 @@ import { ReserveComponent } from './reserve/reserve.component';
 import { FirstloginComponent } from "./firstlogin/firstlogin.component";
 import { ProfileComponent } from './profile/profile.component';
 import { NewDishComponent } from './new-dish/new-dish.component';
+import { EditprofileComponent } from "./editprofile/editprofile.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: 'editprofile',
+    component: EditprofileComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'coach',

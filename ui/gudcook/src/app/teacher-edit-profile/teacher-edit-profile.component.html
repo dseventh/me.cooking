@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-4 border-right">        
+        <p>
+            Upcoming Appointments
+            <button type="button" class="btn px-3 ml-2">
+                <i class="fa fa-edit fa-2x"></i>
+            </button>            
+        </p>
+        <!-- <ul class="list-group">
+            <li *ngFor="let item of userData?.appointments" class="list-group-item border-0">
+                <i class="fa fa-calendar mr-2"></i>{{item.startTime| date:'medium'}}
+            </li>
+        </ul>             -->
+    </div>
+    <div class="col-md-8">
+        <p>
+            Appointments Scheduling
+            <button *ngIf="!appointmentsEdit" type="button" class="btn px-3 ml-2" (click)="schedulingCalendar()">
+                <i class="fa fa-edit fa-2x"></i>
+            </button>            
+        </p>
+        <div *ngIf="!appointmentsEdit">
+            <p>No data found!</p>
+        </div>
+
+        <div class="row" *ngIf="appointmentsEdit">
+            <div class="col-md-4">
+                <ngb-datepicker #dp [(ngModel)]="selectedDate" [minDate] = "minDate" [maxDate] = "maxDate" (dateSelect)="onDateSelection($event)" [dayTemplate]="t" ></ngb-datepicker>
+                <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                    </span>
+                </ng-template>
+            </div>
+            <div class="col-md-8">
+                <ul class="ts-cboxtags time-slot">
+                    <li *ngFor="let timeItem of timeSlot; let i=index"><input type="checkbox" id="checkbox{{i}}" [value]="timeItem.time" [(ngModel)]="timeItem.isChecked" (change)="changeSelection()"><label for="checkbox{{i}}">{{timeItem.timeformat}}</label></li>
+                </ul>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12 remove-padding">
+                    <hr>
+                </div>
+                <div class="col-md-12">			 
+                    <button type="button" class="btn btn-confirm" (click) ="saveAppointments(errorTpl, successTpl)">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-light btn-cancel" (click) ="cancelAppointments()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+		</div>
+    </div>
+</div>
+
+<ng-template #errorTpl>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+    {{errorMsg}}
+</ng-template>
+
+<ng-template #successTpl>
+    <i class="fa fa-check" aria-hidden="true"></i>
+    {{successMsg}}
+</ng-template>

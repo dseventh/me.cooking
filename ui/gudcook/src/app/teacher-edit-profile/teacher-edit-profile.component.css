@@ -1,0 +1,129 @@
+.list-group{
+    max-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range, .custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+
+.custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+}
+
+.time-slot {
+    border: 1px solid #DFDFDF;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/****************** Checkbox design ********************************/
+ul.ts-cboxtags {
+    list-style: none;
+    padding: 20px;
+}
+ul.ts-cboxtags li{
+  display: inline;
+  margin-right: 10px;
+}
+ul.ts-cboxtags li label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+
+ul.ts-cboxtags li label {
+    padding: 8px 12px;
+    cursor: pointer;
+    width: 95px;
+    text-align: center;
+}
+
+ul.ts-cboxtags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+    /* content: "\f067"; */
+    transition: transform .3s ease-in-out;
+}
+
+ul.ts-cboxtags li input[type="checkbox"]:checked + label::before {
+    /* content: "\f00c"; */
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+ul.ts-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #0056B3;
+    background-color: #0069D9;
+    color: #fff;
+    transition: all .2s;
+}
+
+ul.ts-cboxtags li input[type="checkbox"] {
+  display: absolute;
+}
+ul.ts-cboxtags li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+ul.ts-cboxtags li input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}
+/*********************** End Checkbox design *****************************8*/
+
+.btn-confirm {
+    margin-right: 20px;
+    background-color: #FEA705;
+    border-color: #FEA705;
+    color:#000000;
+    padding: 10px 35px;
+    border-radius: 35px;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    color:#000000;
+    padding: 10px 35px;
+    border-radius: 35px;
+    font-weight: bold;
+}
+
+.remove-padding{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+/* .ngb-dp-day.disabled, .ngb-dp-day.hidden {
+    opacity: .5 !important;
+} */

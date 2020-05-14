@@ -31,6 +31,12 @@ import { DishEditorComponent } from './dish-editor/dish-editor.component';
 import { NewDishComponent } from './new-dish/new-dish.component';
 import { TagInputModule } from 'ngx-chips';
 import { BagComponent } from './bag/bag.component';
+import { DishEditComponent } from './dish-edit/dish-edit.component';
+import { StudentEditProfileComponent } from './student-edit-profile/student-edit-profile.component';
+import { TeacherEditProfileComponent } from './teacher-edit-profile/teacher-edit-profile.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+import { ToastService } from './toast-service';
+import { ToastsContainer } from "./toasts-container.component";
 
 @NgModule({
   declarations: [
@@ -54,6 +60,11 @@ import { BagComponent } from './bag/bag.component';
     DishEditorComponent,
     NewDishComponent,
     BagComponent,
+    DishEditComponent,
+    StudentEditProfileComponent,
+    TeacherEditProfileComponent,
+    EditprofileComponent,
+    ToastsContainer
   ],
   imports: [
     BrowserModule,
@@ -66,7 +77,7 @@ import { BagComponent } from './bag/bag.component';
     AngularFirestoreModule,
     AngularFireAuthModule 
   ],
-  providers: [AuthService],
+  providers: [AuthService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

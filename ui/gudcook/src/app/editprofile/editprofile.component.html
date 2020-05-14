@@ -8,8 +8,6 @@
         <div class="col-md-2 border-right">
             <app-uploader  *ngIf="!imageUrl" [imageUrl]="'/assets/image-placeholder.png'" [directory]="getImagesDirectory()" [prefix]="'profile'" (status)="onStatusChange($event)" ></app-uploader>
             <img  *ngIf="imageUrl" [src]="imageUrl" height="200px">
-        <!-- </div>
-        <div class="col-md-2 border-right"> -->
             <p class="mt-2">{{seeker?.displayName}}</p>
             <p class="mt-2">Member since : {{seeker?.joinDate?.toDateString()}}</p>
         </div>
@@ -18,7 +16,5 @@
             <app-student-edit-profile *ngIf="seeker?.persona == 'seeker'" [userData]="seeker"></app-student-edit-profile>
         </div>
     </div>
-    <app-dish-browser></app-dish-browser>
+    <app-dish-editor [coach]="seeker"></app-dish-editor>
 </div>
-
-

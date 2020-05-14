@@ -13,33 +13,10 @@
             <p class="mt-2">{{coach?.displayName}}</p>
             <p class="mt-2">Member since : {{coach?.joinDate?.toDateString()}}</p>
         </div>
-        <div class="col-md-4">
-            <p>
-                Personal Information
-                <button type="button" class="btn px-3 ml-2"><i class="fa fa-edit fa-2x"></i>
-                </button>            
-            </p>
-            <p>
-                Email : {{coach?.email}}
-            </p>
-            <p>
-                About me:<br>
-                {{coach?.description}}
-            </p>        
+        <div class="col-md-8">
+            <app-teacher-edit-profile [userData]="coach"></app-teacher-edit-profile>
         </div>
-        <div class="col-md-4 border-right">
-            <p>
-                Upcoming Appointments
-                <button type="button" class="btn px-3 ml-2">
-                    <i class="fa fa-edit fa-2x"></i>
-                </button>            
-            </p>
-            <ul class="list-group">
-                <li *ngFor="let item of coach?.appointments" class="list-group-item border-0">
-                    <i class="fa fa-calendar mr-2"></i>{{item.startTime| date:'medium'}}
-                </li>
-            </ul>            
-        </div>
+    
     </div>
-    <app-dish-editor *ngIf="coach" [coach]="coach"></app-dish-editor>
+    <app-dish-editor [coach]="coach"></app-dish-editor>
 </div>

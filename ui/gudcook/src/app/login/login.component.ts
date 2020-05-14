@@ -42,11 +42,8 @@ export class LoginComponent implements OnInit {
     .subscribe(u=>{
       if (u) {
         console.log(u);
-        if (u.persona === 'seeker')
-          this.router.navigate(['/seeker']);
-        else
-        if (u.persona === 'coach')
-          this.router.navigate(['/coach']);  
+        if (u.persona === 'seeker' || u.persona === 'coach')
+          this.router.navigate(['/editprofile']);
         else 
           this.router.navigate(['/firstlogin']);
       }

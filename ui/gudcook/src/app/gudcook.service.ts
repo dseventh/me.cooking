@@ -38,6 +38,10 @@ export class GudcookService {
       user.joinDate = new Date(docData.joinDate);
       console.log(`Join date value is ${docData.joinDate}`)
     }
+    if (docData.appointmentsDate)
+      user.appointmentsDate = docData.appointmentsDate;
+    if (docData.appointmentsTime)
+      user.appointmentsTime = docData.appointmentsTime;
     if (docData.persona)
       user.persona = docData.persona;
     user.id = id; 
@@ -73,6 +77,10 @@ export class GudcookService {
       item.persona = user.persona;
     if (user.imageId)
       item.imageId = user.imageId;
+    if (user.appointmentsDate)
+      item.appointmentsDate = user.appointmentsDate;
+    if (user.appointmentsTime)
+      item.appointmentsTime = user.appointmentsTime;
     return this.firestore.collection('users').doc(user.id).set( item,{ merge : true })
   }
 
