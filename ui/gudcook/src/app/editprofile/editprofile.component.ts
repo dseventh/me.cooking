@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Seeker,Duration, CuisineSearchParams } from '../models';
+import { Seeker,Duration, CuisineSearchParams, User } from '../models';
 import { CacheService } from '../cache.service';
 import { Router } from '@angular/router';
 import { GudcookService } from '../gudcook.service';
@@ -13,8 +13,8 @@ import { UploadStatus } from '../uploader/uploader.component';
   styleUrls: ['./editprofile.component.css']
 })
 export class EditprofileComponent implements OnInit {
-  seeker : Seeker = null;
-  imageUrl : string;
+  user : User = null;
+  imageUrl : string = '/assets/image-placeholder.png';
   currentStatus : UploadStatus;
 
   constructor(
@@ -31,7 +31,7 @@ export class EditprofileComponent implements OnInit {
     this.firebaseAuth.currentUser.then( u => {
       if (u) {
         this.gudcookService.getUser(u.uid).subscribe( user => {
-          this.seeker = user as Seeker;
+          this.user = user;
           console.log(`Displayname is ${u.displayName}, joindate = ${user.joinDate}`);
           if (user.imageId) {
             console.log(`Image id ${user.imageId}`);
@@ -53,7 +53,7 @@ export class EditprofileComponent implements OnInit {
     console.log('File upload status')
     this.currentStatus = status;
     if (this.currentStatus.objectName) {
-      this.seeker.imageId = this.currentStatus.objectName;
+      this.user.imageId = this.currentStatus.objectName;
       let pathRef = this.storage.ref(this.currentStatus.objectName);
       pathRef.getDownloadURL().subscribe( url => {
         console.log('Setting image url')
@@ -63,8 +63,8 @@ export class EditprofileComponent implements OnInit {
   }
 
   getImagesDirectory() {
-    if (this.seeker && this.seeker.id)
-      return 'images/' + this.seeker.id;
+    if (this.user && this.user.id)
+      return 'images/' + this.user.id;
     return null;
   }
 

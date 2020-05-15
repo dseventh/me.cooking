@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, DocumentData } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {Coach,Seeker, User,Dish,Appointment} from './models';
+import {Coach,Seeker, User,Dish,Booking} from './models';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { doesNotThrow } from 'assert';
@@ -195,7 +195,41 @@ export class GudcookService {
     }))      
   }
 
-  
+  setBooking( booking: Booking) {
+    let item : any = {};
+    if (booking.personId)
+      item.personId = booking.personId;
+    if (booking.seekerId)
+      item.seekerId = booking.seekerId;
+    if (booking.createdDate)
+      item.createdDate = booking.createdDate;
+    if (booking.bookingDate)
+      item.bookingDate = booking.bookingDate;
+    if (booking.bookingTime)
+      item.bookingTime = booking.bookingTime;
+    if (booking.dishId)
+      item.dishId = booking.dishId;
+    if (booking.status) 
+      item.status = booking.status;
+    return this.firestore.collection('bookings').add(item)
+      .catch( err => alert('Failed to add dish ${err}'));
+  }
+
+  getTeachersBooking(teacherId : string) : Observable<Booking[]> {
+    return this.firestore.collection('bookings', ref => ref.where( 'personId' ,'==',teacherId)).get().pipe( map ( document => document.docs.map( x => {
+      let d = new Booking;
+      d.id = x.id;
+      d.personId = x.get('personId');
+      d.seekerId = x.get('seekerId');
+      d.createdDate = x.get('createdDate');
+      d.bookingDate = x.get('bookingDate');
+      d.bookingTime = x.get('bookingTime');
+      d.dishId = x.get('dishId');
+      d.status = x.get('status');
+      return d;
+    })))      
+  }
+
   constructor(private firestore : AngularFirestore, private firebaseAuth: AngularFireAuth) {     
     // Set up a notification so that whenever there is a change is user's auth state, we get notified
   }

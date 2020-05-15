@@ -5,7 +5,13 @@ import { ToastService } from '../toast-service';
 import { GudcookService } from '../gudcook.service';
 
 interface Pagination {
-  avlDate: number;
+  bookingDate: Number;
+  bookingTime: string;
+  status:string;
+}
+
+interface Pagination1 {
+  avlDate: Number;
 }
 
 @Component({
@@ -28,8 +34,9 @@ export class TeacherEditProfileComponent implements OnInit {
   toDate: NgbDate | null = null;
   timeSlot:any = [];
   selectedItemsList:any = [];
-  teacherAppointmentList:Pagination[];
+  teacherAppointmentList:Pagination1[];
   public teacherAvlTime:string = null;
+  teacherBookingList:Pagination[];
 
   // pagination 
   public page = 1;
@@ -49,6 +56,19 @@ export class TeacherEditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAppointmentsList();
+    this.getAllBookingList();
+  }
+
+  getAllBookingList(){
+    // Get user all booking list
+    let teacherData:any = this.userData;
+    if (teacherData.id && teacherData.id !='') {
+      this.gudcookService.getTeachersBooking(teacherData.id).subscribe((data:any) => {
+        console.log('data', data);
+        this.teacherBookingList = data;
+        this.collectionSize = data.length;
+      });      
+    }
   }
 
   getAllAppointmentsList(){
@@ -209,8 +229,8 @@ export class TeacherEditProfileComponent implements OnInit {
   }
 
   get paginationData(): Pagination[] {
-    return  this.teacherAppointmentList
-      .map((country, i) => ({id: i + 1, ...country}))
+    return  this.teacherBookingList
+      // .map((country, i) => ({id: i + 1, ...country}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 

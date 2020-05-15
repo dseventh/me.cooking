@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7">
-			<img class="img-fluid" alt="Dish image" src="{{dish.pictureId}}" />
+			<img class="img-fluid" alt="Dish image" src="{{dish?.pictureId}}" />
 		</div>
 		<div class="col-md-5">
 			<div class="row mt-5">
@@ -10,10 +10,10 @@
 				</div>
 				<div class="col-md-12">
 					<h3>
-						{{dish.name}}
+						{{dish?.name}}
 					</h3>
 					<p>
-						{{dish.description}}
+						{{dish?.description}}
 					</p>
 				</div>
 			</div>
@@ -21,13 +21,13 @@
 				<div class="col-md-12">
 					<ul class="list-unstyled">
 						<li class="list-item">
-							Duration : {{dish.duration}} Minutes
+							Duration : {{dish?.duration}} Minutes
 						</li>
 						<li class="list-item">
-							Rating : {{dish.ratings}} Stars
+							Rating : {{dish?.ratings}} Stars
 						</li>
 						<li class="list-item">
-							Cuisine : {{dish.cuisine}}
+							Cuisine : {{dish?.cuisine}}
 						</li>
 					</ul>
 				</div>
@@ -54,7 +54,7 @@
                 </button>            
             </h4>
             <ul class="list-group">
-                <li *ngFor="let item of dish.ingredients" class="list-group-item border-0 py-0">
+                <li *ngFor="let item of dish?.ingredients" class="list-group-item border-0 py-0">
                     {{item}}
                 </li>
             </ul>            
@@ -67,7 +67,7 @@
                 </button>            
             </h4>
             <ul class="list-group">
-                <li *ngFor="let item of dish.equipment" class="list-group-item border-0 py-0">
+                <li *ngFor="let item of dish?.equipment" class="list-group-item border-0 py-0">
                     {{item}}
                 </li>
             </ul>            
@@ -93,7 +93,7 @@
                 </button>            
             </h4>
 			<p>
-				{{dish.story}}
+				{{dish?.story}}
 			</p>
 		</div>
 		<div class="col-md-6">
@@ -109,34 +109,4 @@
 			</div> 
 		</div>
 	</div>
-	<div class="row mt-3">
-		<div class="col-md-12">
-			<hr>
-			<h3>
-				Calendar
-			</h3>
-			<p>
-				There are {{appointments.length}} requests made to learn this dish. Reschedule or confirm days
-			</p>
-			<div *ngFor="let item of appointments; let i = index">
-				<div class="checkbox">					 
-					<label>
-						<input type="checkbox" [checked]="selected[i]" (change)="selected[i] = !selected[i]" class="mr-2"/>{{item.startTime| date:'medium'}}
-					</label>
-				</div> 
-			</div>
-		</div>
-	</div>
-	<div class="row mt-3">
-		<div class="col-md-3">			 
-			<button type="button" class="btn btn-success">
-				Confirm
-			</button>
-		</div>
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<hr>
 </div>

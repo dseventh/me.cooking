@@ -63,40 +63,59 @@
             </ul>            
 		</div>
 	</div>
+
+
+
 	<div class="row mt-3">
 		<div class="col-md-12">
 			<hr>
 			<h3> Book a time slot: </h3>
 			<p> Let our chef know what time works best for you and we will confirm. </p>
-			<p class="date-time-text">Click on day that works best for you and then select a time</p>
-			
+			<p class="date-time-text">Click on day that works best for you and then select a time</p>			
 		</div>
-		<div class="col-md-3">
-			<ngb-datepicker #dp [(ngModel)]="teacherAvlDate" [minDate] = "minDate" (dateSelect)="onDateSelect($event)"></ngb-datepicker>
-		</div>
-		<div class="col-md-3 time-slot" *ngIf="isDisplayTimeSlot">
-			<div>
-				<label class="teacher-time-slot"><span>9am - 10am</span></label>
-				<label class="teacher-time-slot"><span>10am - 111am</span></label>
-				<label class="teacher-time-slot"><span>11am - 12pm</span></label>
-				<label class="teacher-time-slot"><span>12pm - 1pm</span></label>
-				<label class="teacher-time-slot"><span>1pm - 2pm</span></label>
-				<label class="teacher-time-slot"><span>2pm - 3pm</span></label>
+	</div>	
+
+	<form [formGroup]="bookingForm">
+		<div class="row mt-3">
+			<div class="col-md-3">
+				<ngb-datepicker #dp [(ngModel)]="teacherAvlDate" [minDate] = "minDate" [maxDate] = "maxDate" (dateSelect)="onDateSelect($event)" formControlName="bookingDate"></ngb-datepicker>
 			</div>
+			<div class="col-md-4 d-flex justify-content-center time-slot">
+				<ul class="ts-cboxtags">
+                    <li *ngFor="let schdlTime of scheduledTimes; let i = index" class="{{schdlTime.isBooked==true?'booked-schedule':''}}"><input type="radio" name="scheduleTime" id="radio{{i}}" [value]="schdlTime.avltime" [attr.disabled]="schdlTime.isBooked===true?'disabled':null" formControlName="scheduleTime"><label for="radio{{i}}">{{schdlTime.timeFormat}}</label></li>
+                </ul>
+				<!-- <div>
+					<label *ngFor="let schdlTime of scheduledTimes; let i = index"
+						class="teacher-time-slot col-md-4 m-3 {{schdlTime.isBooked==true?'bg-secondary text-white':'bg-primary'}}">
+						<input type="radio" class="scheduleTime" name="scheduleTime" [value]="schdlTime.avltime" [attr.disabled]="schdlTime.isBooked===true?'disabled':null" formControlName="scheduleTime"> {{schdlTime.timeFormat}}
+					</label>
+				</div> -->
+			</div>
+			<div class="col-md-3"></div>
 		</div>
-	</div>
-	<div class="row mt-3">
-		<div class="col-md-12">
-			<hr>
-			<div class="col-md-3">			 
-				<button type="button" class="btn btn-confirm">
+
+		<div class="row mt-3">
+			<div class="col-md-12">
+				<hr>
+				<button type="button" class="btn btn-confirm" (click)="bookingSubmit(bookingForm.value, errorTpl, successTpl)">
 					Confirm
 				</button>
 				<button type="button" class="btn btn-light btn-cancel">
 					Cancel
 				</button>
 			</div>
-		</div>
-	</div>	
-	<div class="row mt-3"></div>
+		</div>	
+	</form>
+	<div class="row mt-3">		
+	</div>
 </div>
+
+<ng-template #errorTpl>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+    {{message}}
+</ng-template>
+
+<ng-template #successTpl>
+    <i class="fa fa-check" aria-hidden="true"></i>
+    {{message}}
+</ng-template>

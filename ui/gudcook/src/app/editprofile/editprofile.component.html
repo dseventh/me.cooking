@@ -5,16 +5,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2 border-right">
-            <app-uploader  *ngIf="!imageUrl" [imageUrl]="'/assets/image-placeholder.png'" [directory]="getImagesDirectory()" [prefix]="'profile'" (status)="onStatusChange($event)" ></app-uploader>
-            <img  *ngIf="imageUrl" [src]="imageUrl" height="200px">
-            <p class="mt-2">{{seeker?.displayName}}</p>
-            <p class="mt-2">Member since : {{seeker?.joinDate?.toDateString()}}</p>
+        <div class="col-md-3 border-right">
+            <app-uploader  [imageUrl]="imageUrl ? imageUrl : '/assets/image-placeholder.png'" [directory]="getImagesDirectory()" [prefix]="'profile'" (status)="onStatusChange($event)" ></app-uploader>
+            <p class="mt-2">{{user?.displayName}}</p>
+            <p class="mt-2">Member since : {{user?.joinDate?.toDateString()}}</p>
         </div>
-        <div class="col-md-10">
-            <app-teacher-edit-profile *ngIf="seeker?.persona == 'coach'" [userData]="seeker"></app-teacher-edit-profile> 
-            <app-student-edit-profile *ngIf="seeker?.persona == 'seeker'" [userData]="seeker"></app-student-edit-profile>
+        <div class="col-md-9">
+            <app-teacher-edit-profile *ngIf="user?.persona == 'coach'" [userData]="user"></app-teacher-edit-profile> 
+            <app-student-edit-profile *ngIf="user?.persona == 'seeker'" [userData]="user"></app-student-edit-profile>
         </div>
     </div>
-    <app-dish-editor [coach]="seeker"></app-dish-editor>
+    <app-dish-editor *ngIf="user?.persona == 'coach'" [coach]="user"></app-dish-editor>
+    <app-dish-browser *ngIf="user?.persona == 'seeker'" ></app-dish-browser>
 </div>

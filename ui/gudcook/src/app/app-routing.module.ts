@@ -4,8 +4,6 @@ import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { CompanyComponent } from './company/company.component';
 import { BlogComponent } from './blog/blog.component';
-import { CoachhomeComponent } from './coachhome/coachhome.component';
-import { SeekerhomeComponent } from './seekerhome/seekerhome.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import {LoginComponent} from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -15,6 +13,7 @@ import { FirstloginComponent } from "./firstlogin/firstlogin.component";
 import { ProfileComponent } from './profile/profile.component';
 import { NewDishComponent } from './new-dish/new-dish.component';
 import { EditprofileComponent } from "./editprofile/editprofile.component";
+import { DishEditComponent } from './dish-edit/dish-edit.component';
 
 const routes: Routes = [
   {
@@ -40,11 +39,6 @@ const routes: Routes = [
     canActivate : [AuthGuard]
   },
   {
-    path: 'coach',
-    component: CoachhomeComponent,
-    canActivate : [AuthGuard]
-  },
-  {
     path: 'profile',
     component: ProfileComponent,
     canActivate : [AuthGuard]
@@ -55,8 +49,8 @@ const routes: Routes = [
     canActivate : [AuthGuard]
   },
   {
-    path: 'seeker',
-    component: SeekerhomeComponent,
+    path: 'editdish/:id',
+    component: DishEditComponent,
     canActivate : [AuthGuard]
   },
   {

@@ -21,6 +21,11 @@ export class SignupComponent implements OnInit {
   
   
   ngOnInit(): void {    
+    this.firebaseAuth.currentUser.then( u => {
+      if (u) {
+        this.router.navigate(['editprofile']);
+      }
+    })
   }
   
   validateInput() {

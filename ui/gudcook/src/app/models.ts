@@ -77,3 +77,13 @@ export class BannerData {
     buttonRoute : string[];
     overlay? : true;
 }
+
+export class Booking extends Entity{
+    personId : string;
+    seekerId : string;
+    createdDate: Number;
+    bookingDate : Number; 
+    bookingTime : string;
+    dishId : string;
+    status : string;   
+};

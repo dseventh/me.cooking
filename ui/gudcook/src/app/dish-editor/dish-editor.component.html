@@ -13,6 +13,20 @@
     <div class="col-4" *ngFor="let view of dishes">
         <div  class="card mb-5">
             <div class="card-img-caption">
+                <a [routerLink]="['/editdish',view.id]"><img class="card-img-top" src="{{view.pictureId}}"></a>
+            </div>                    
+            <div class="card-body">
+                <h5 class="card-title text-center"><a [routerLink]="['/editdish',view.id]">{{view.name}}</a></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="row mt-5">        
+    <div class="col-4" *ngFor="let view of dishes">
+        <div  class="card mb-5">
+            <div class="card-img-caption">
                 <img class="card-img-top" src="{{view.pictureId}}">
             </div>                    
             <div class="card-body text-center">
@@ -21,4 +35,4 @@
         </div>
     </div>
 </div>
-
+ -->
